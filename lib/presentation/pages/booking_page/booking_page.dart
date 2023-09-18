@@ -75,7 +75,7 @@ class _BookingPageState extends State<BookingPage> {
 
   @override
   Widget build(BuildContext context) {
-    final bookingData = context.read<HotelBloc>().hotel.bookingData!;
+    final bookingData = context.read<HotelBloc>().state.hotel!.bookingData!;
     int totalPrice = bookingData.tourPrice +
         bookingData.fuelCharge +
         bookingData.serviceCharge;

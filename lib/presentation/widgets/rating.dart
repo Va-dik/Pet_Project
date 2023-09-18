@@ -8,7 +8,7 @@ class Rating extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final hotel = context.read<HotelBloc>().hotel;
+    final hotel = context.read<HotelBloc>().state.hotel;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       decoration: const BoxDecoration(
@@ -27,7 +27,7 @@ class Rating extends StatelessWidget {
             width: 1,
           ),
           CustomText(
-            '${hotel.rating} ${hotel.ratingName}',
+            '${hotel!.rating} ${hotel.ratingName}',
             fontSize: 16,
             fontWeight: FontWeight.w600,
             color: const Color.fromRGBO(255, 168, 0, 1),

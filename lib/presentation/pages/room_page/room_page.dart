@@ -11,7 +11,7 @@ class RoomPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final HotelModel hotel = context.read<HotelBloc>().hotel;
+    final HotelModel hotel = context.read<HotelBloc>().state.hotel!;
     return Scaffold(
       appBar: CustomAppBar(title: hotel.name),
       body: ListView.builder(

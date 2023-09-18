@@ -32,10 +32,10 @@ class HotelBody extends StatelessWidget {
           Wrap(
             spacing: 8,
             runSpacing: 8,
-            children: (context
-                    .read<HotelBloc>()
-                    .hotel
-                    .aboutTheHotel['peculiarities'] as List)
+            children: context
+                    .read<HotelBloc>().state
+                    .hotel!
+                    .aboutTheHotel!.peculiarities
                 .map((element) => Snippet(text: element))
                 .toList(),
           ),
@@ -43,7 +43,7 @@ class HotelBody extends StatelessWidget {
             height: 12,
           ),
           CustomText(
-            context.read<HotelBloc>().hotel.aboutTheHotel['description'],
+            context.read<HotelBloc>().state.hotel!.aboutTheHotel!.description,
             fontSize: 16,
             color: const Color.fromARGB(255, 0, 0, 0),
           ),

@@ -1,7 +1,7 @@
 import 'package:hotels/domain/models/hotel/hotel_model.dart';
 
 class HotelState {
-  final HotelModel? hotel;
+   HotelModel? hotel;
   final bool isLoading;
 
   HotelState({
@@ -14,7 +14,7 @@ class HotelState {
     bool isLoading = false,
   }) {
     return HotelState(
-      hotel: hotel,
+      hotel: hotel ?? this.hotel,
       isLoading: isLoading,
     );
   }

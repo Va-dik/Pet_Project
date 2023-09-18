@@ -12,7 +12,7 @@ class TourInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final BookingModel bookingData =
-        context.read<HotelBloc>().hotel.bookingData!;
+        context.read<HotelBloc>().state.hotel!.bookingData!;
     List<List<String>> tableData = [
       [StringConstants.departure, bookingData.departure],
       [StringConstants.countryCity, bookingData.arrivalCountry],

@@ -10,19 +10,25 @@ import 'package:hotels/domain/models/hotel/hotel_model.dart';
 import 'package:hotels/domain/models/room/room_model.dart';
 
 class HotelBloc extends Bloc<HotelEvent, HotelState> {
+  final Dio dio = Dio();
+  late final HotelRepository hotelRepository;
+  late final RoomRepository roomRepository;
+  late final BookingRepository bookingRepository;
+
   HotelBloc() : super(HotelState()) {
     on<GetHotelDataEvent>(_getHotelData);
     on<GetHotelRoomsDataEvent>(_getHotelRoomsData);
     on<GetBookingDataEvent>(_getBookingData);
+    
+    hotelRepository = HotelRepository(dio);
+    roomRepository = RoomRepository(dio);
+    bookingRepository = BookingRepository(dio);
   }
 
-  final Dio dio = Dio();
   late HotelModel hotel;
 
   void _getHotelData(GetHotelDataEvent event, Emitter<HotelState> emit) async {
     emit(state.copyWith(isLoading: true));
-
-    final HotelRepository hotelRepository = HotelRepository(dio);
 
     hotel = await hotelRepository.getHotel();
 
@@ -58,6 +64,52 @@ class HotelBloc extends Bloc<HotelEvent, HotelState> {
 
     hotel.bookingData = bookingData;
 
-    emit(state.copyWith(hotel: hotel, ));
+    emit(state.copyWith(
+      hotel: hotel,
+    ));
   }
+
+  // Future<void> _onGetDataEvent(
+  //   GetDataEvent event,
+  //   Emitter emit,
+  // ) async
+  // {
+  //   emit(state.copyWith(isLoading: true));
+
+  //   final hotel = await hotelRepository.getHotel();
+  //   hotel
+  //     ..rooms = (await roomRepository.getRooms()).rooms
+  //     ..bookingData = await bookingRepository.getBookingData();
+
+  //   emit(state.copyWith(hotel: hotel));
+  // }
+
+  // Future<void> _getHotelData(GetHotelDataEvent event, Emitter<HotelState> emit) async
+  // {
+  //   emit(state.copyWith(isLoading: true));
+
+  //   emit(state.copyWith(hotel: await hotelRepository.getHotel()));
+  // }
+
+  // Future<void> _getHotelRoomsData(
+  //     GetHotelRoomsDataEvent event, Emitter<HotelState> emit,) async
+  // {
+  //   emit(state.copyWith(isLoading: true));
+
+  //   final hotel = state.hotel;
+  //   hotel?.rooms = (await roomRepository.getRooms()).rooms;
+
+  //   emit(state.copyWith(hotel: hotel));
+  // }
+
+  // Future<void> _getBookingData(
+  //     GetBookingDataEvent event, Emitter<HotelState> emit,) async
+  // {
+  //   emit(state.copyWith(isLoading: true));
+
+  //   final hotel = state.hotel;
+  //   hotel?.bookingData = await bookingRepository.getBookingData();
+
+  //   emit(state.copyWith(hotel: hotel, ));
+  // }
 }

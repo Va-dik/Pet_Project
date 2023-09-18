@@ -9,7 +9,7 @@ class HotelHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final HotelModel hotel = context.read<HotelBloc>().hotel;
+    final HotelModel hotel = context.read<HotelBloc>().state.hotel!;
     return Header(
       photos: hotel.imageUrls,
       name: hotel.name,

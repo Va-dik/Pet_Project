@@ -16,7 +16,7 @@ class HotelDetails extends StatelessWidget {
         const Rating(),
         const SizedBox(height: 8),
         CustomText(
-          context.read<HotelBloc>().hotel.name,
+          context.read<HotelBloc>().state.hotel!.name,
           fontWeight: FontWeight.w600,
           fontSize: 22,
           letterSpacing: -1,
@@ -29,7 +29,7 @@ class HotelDetails extends StatelessWidget {
           ),
           onPressed: () {},
           child: CustomText(
-            context.read<HotelBloc>().hotel.address,
+            context.read<HotelBloc>().state.hotel!.address,
             color: const Color.fromRGBO(13, 114, 255, 1),
             fontWeight: FontWeight.w600,
             fontSize: 14,
